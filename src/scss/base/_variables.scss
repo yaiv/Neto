@@ -1,0 +1,54 @@
+// Fuentes
+$fuente_principal: 'Poppins', sans-serif;
+
+// Tamaño de Media Queries
+$telefono: 480px;
+$tablet: 768px;
+$desktop: 1024px;
+
+// Colores
+$azul: #0da6f3;
+$rojo: #cb0000;
+$verde:#329f00;
+$negro: #1a1b15;
+
+$blanco: #FFFFFF;
+$gris: #e1e1e1;
+
+$separacion: 5rem;
+
+// Fuentes
+$delgada: 300;
+$regular : 400;
+$bold: 700;
+$black: 900;
+
+// -----------------------------
+// Tema / Marca (centraliza hardcodeos)
+// -----------------------------
+// Color de fondo principal de la app
+$brand-primary: #FF5722;
+$background: $brand-primary;
+
+// Tonos de apoyo
+$brand-blue-700: #1e3a8a;
+$brand-blue-800: #1e40af;
+
+// Vidrio/Glassmorphism
+$glass-bg: rgba(255, 255, 255, 0.95);
+$glass-border: rgba(255, 255, 255, 0.2);
+$glass-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+
+// Anchos del navbar
+$navbar-maxwidth: 720px;
+$navbar-maxwidth-tablet: 840px;
+$navbar-maxwidth-desktop: 960px;
+
+// Imagen hero (ruta relativa respecto al CSS compilado)
+$hero-image: '../img/2.png';
+
+// Colores de marcas (iconos)
+$brand-slack: #4A154B;
+$brand-ticket: #3B82F6;
+$brand-workplace: #10B981;
+$boton-azulNeto: #0E3B83

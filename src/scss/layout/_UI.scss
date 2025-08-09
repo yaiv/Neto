@@ -1,0 +1,202 @@
+@use 'base/variables' as v;
+@use 'base/mixins' as m;
+@use 'sass:color';
+
+.contenedor-app{
+    @include m.contenedor-flexible(column);
+    & { gap: 2rem; }
+
+    .imagen {
+        margin-top: 0;
+        @include m.imagen-fondo(v.$hero-image, 40vh, 100vh);
+    }
+
+    .app{
+        width: 95%;
+        margin: 0 auto;
+        padding: 1rem 2rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: auto;
+        min-height: auto; 
+        padding-bottom: 1rem;
+        
+        @include m.tablet {
+            padding: 2rem 0;
+            width: 100%;
+            height: 100vh;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+}
+
+.navbar {
+    background: v.$glass-bg;
+    backdrop-filter: blur(20px);
+    border-radius: 20px;
+    padding: 16px 20px;
+    box-shadow: v.$glass-shadow;
+    border: 1px solid v.$glass-border;
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    transition: all 0.3s ease;
+    width: 100%;
+    max-width: v.$navbar-maxwidth;
+    margin: 0 auto;
+  
+    @include m.telefono {
+        gap: 20px;
+    }
+    
+    @include m.tablet {
+        padding: 24px 28px;
+        gap: 24px;
+        max-width: v.$navbar-maxwidth-tablet;
+    }
+
+    @include m.desktop {
+        padding: 28px 32px;
+        gap: 32px;
+        max-width: v.$navbar-maxwidth-desktop;
+    }
+}
+
+.nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    padding: 20px 25px;
+    border-radius: 16px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+    flex: 1 1 140px;
+    max-width: 220px;
+    
+    @include m.telefono {
+        padding: 15px 20px;
+        flex: 1 1 120px;
+    }
+
+    @include m.tablet {
+        flex: 0 0 auto;
+    }
+}
+
+.nav-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        135deg,
+        rgba(v.$brand-primary, 0.10),
+        rgba(color.adjust(v.$brand-primary, $lightness: 10%), 0.10)
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    border-radius: 16px;
+}
+
+.nav-item:hover::before {
+    opacity: 1;
+}
+
+.nav-item:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+}
+
+.nav-icon {
+    width: 48px;
+    height: 48px;
+    margin-bottom: 12px;
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 2;
+    display: inline-block;
+    color: inherit;
+    
+    @include m.telefono {
+        width: 40px;
+        height: 40px;
+        margin-bottom: 8px;
+    }
+}
+
+.nav-icon path { fill: currentColor; }
+
+.nav-item:hover .nav-icon {
+    transform: scale(1.1);
+}
+
+.nav-label {
+    font-size: 14px;
+    font-weight: 600;
+    color: v.$brand-blue-700;
+    transition: color 0.3s ease;
+    position: relative;
+    z-index: 2;
+    letter-spacing: 0.5px;
+    
+    @include m.telefono {
+        font-size: 12px;
+    }
+}
+
+.nav-item:hover .nav-label {
+    color: v.$brand-blue-800;
+}
+
+/* Colores específicos / iconos por marca */
+.nav-icon { color: inherit; }
+.slack .nav-icon { color: v.$brand-slack; }
+.tickets .nav-icon { color: v.$brand-ticket; }
+.workplace .nav-icon { color: v.$brand-workplace; }
+
+/* Gradientes hover por ítem usando variables */
+.slack:hover::before {
+    background: linear-gradient(135deg, rgba(v.$brand-primary, 0.15), rgba(v.$brand-blue-700, 0.10));
+}
+
+.tickets:hover::before {
+    background: linear-gradient(135deg, rgba(v.$brand-blue-700, 0.15), rgba(v.$brand-primary, 0.10));
+}
+
+.workplace:hover::before {
+    background: linear-gradient(
+        135deg,
+        rgba(color.adjust(v.$brand-primary, $lightness: 10%), 0.15),
+        rgba(color.adjust(v.$brand-blue-700, $lightness: -10%), 0.10)
+    );
+}
+
+/* Animación de carga */
+.navbar {
+    animation: slideUp 0.8s ease-out;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.boton{
+    @include m.boton(v.$boton-azulNeto, v.$blanco);
+}

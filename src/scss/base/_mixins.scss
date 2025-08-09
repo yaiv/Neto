@@ -1,0 +1,166 @@
+@use 'variables' as v;
+
+/** Media Queries **/
+@mixin telefono {
+    @media (min-width: v.$telefono) {
+        @content;
+    }
+}
+@mixin tablet {
+    @media (min-width: v.$tablet) {
+        @content;
+    }
+}
+@mixin desktop {
+    @media (min-width: v.$desktop) {
+        @content;
+    }
+}
+
+// Mixin para imágenes responsivas
+@mixin imagen-responsiva($altura-movil: 40vh, $altura-tablet: 100vh) {
+    height: $altura-movil;
+    min-height: 300px;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    
+    @include tablet {
+        height: 100vh;
+        min-height: 100vh;
+        background-size: cover;
+        background-position: center center;
+        object-fit: cover;
+    }
+}
+
+// Mixin para contenedores flexibles
+@mixin contenedor-flexible($direccion: column) {
+    display: flex;
+    flex-direction: $direccion;
+    min-height: 100vh;
+    
+    @include tablet {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+
+@mixin boton($bgColor, $colorTexto) {
+    background-color: $bgColor;
+    padding: 1.5rem 4rem;
+    color: $colorTexto;
+    margin-top: 2rem;
+    font-size: 2rem;
+    font-weight: 400;
+    display: inline-block;
+    font-weight: 700;
+    border: none;
+    transition-property: background-color;
+    transition-duration: .3s;
+    text-align: center;
+    display: block;
+    width: 100%;
+    margin: 5rem 0;
+
+    @include tablet {
+        width: auto;
+    }
+    &:hover {
+        background-color: darken( $bgColor, 10% );
+        cursor: pointer;
+    }
+}
+
+@mixin grid($columnas, $espaciado ) {
+    display: grid;
+    gap: $espaciado;
+    grid-template-columns: repeat($columnas, 1fr);
+}
+
+// Mixin para imágenes de fondo responsivas
+@mixin imagen-fondo($url, $altura-movil: 40vh, $altura-tablet: 100vh) {
+    background-image: url($url);
+    @include imagen-responsiva($altura-movil, $altura-tablet);
+}
+
+// Mixin para imágenes de fondo con proporciones correctas
+@mixin imagen-fondo-proporcional($url) {
+    background-image: url($url);
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    height: 40vh;
+    min-height: 300px;
+    
+    @include tablet {
+        height: 100vh;
+        min-height: 100vh;
+        // Mantener proporciones sin distorsión
+        background-size: cover;
+        background-position: center center;
+    }
+}
+
+// Mixin para contenedores con aspect ratio
+@mixin aspect-ratio($width, $height) {
+    position: relative;
+    &::before {
+        display: block;
+        content: "";
+        width: 100%;
+        padding-top: ($height / $width) * 100%;
+    }
+    > * {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
+}
+
+// Mixin para imágenes con object-fit (mejor para mantener proporciones)
+@mixin imagen-object-fit($url) {
+    background-image: url($url);
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 40vh;
+    min-height: 300px;
+    
+    @include tablet {
+        height: 100vh;
+        min-height: 100vh;
+        // Asegurar que la imagen mantenga sus proporciones
+        background-size: cover;
+        background-position: center center;
+        // Evitar que se estire
+        background-attachment: local;
+    }
+}
+
+// Mixin para evitar distorsión de imágenes en desktop
+@mixin imagen-sin-distorsion($url) {
+    background-image: url($url);
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 40vh;
+    min-height: 300px;
+    
+    @include tablet {
+        height: 100vh;
+        min-height: 100vh;
+        // Configuración específica para evitar distorsión
+        background-size: cover;
+        background-position: center center;
+        // Forzar que la imagen mantenga sus proporciones
+        background-attachment: scroll;
+        // Asegurar que no se estire
+        background-clip: border-box;
+    }
+}
